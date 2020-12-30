@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game of Thrones</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <style>
+    body{
+      background-image: url(nieve.gif);
+    }
+    img{
+      width: 200px;
+      height: 200px;
+      margin: 10px;
+      margin-top: 0px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px goldenrod;
+    }
+    .a{
+      display: inline-block;
+      width: 250px;
+      height: 270px;
+      display: inline-block;
+      border:  5px solid goldenrod;
+      margin: 10px;
+      text-align: center;
+      border-radius: 130px;
+    }
+    .masInfo{
+      border:  5px double goldenrod;
+      margin: 10px;
+    }
+    h1{
+      text-align: center;
+      background-color: goldenrod;
+      color: white;
+      box-shadow: 0px 0px 10px goldenrod;
+    }
+    .a p{
+      background-color: goldenrod;
+      color: white;
+      box-shadow: 0px 0px 10px goldenrod;
+      padding: 3px;
+    }
+    .cuadroCasas{
+      margin-left: 70px;
+    }
+    p{
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div class="cuadroCasas">
+      <div class="a">
+        <p>House stark</p>
+        <img src="stark.jpg" alt="362" class="h">
+      </div>
+      <div class="a">
+        <p>House Targaryen</p>
+        <img src="targaryen.jpg" alt="378" class="h">
+      </div>
+      <div class="a">
+        <p>House Lannister</p>
+        <img src="lannister.jpg" alt="229" class="h">
+      </div>
+      <div class="a">
+        <p>House Baratheon</p>
+        <img src="baratheon.png" alt="17" class="h">
+      </div>
+    </div>
+    <div class="masInfo">
+      <h1>Informacion de la Casa</h1>
+      <div class="informacion"></div>
+    </div>
+  </div>
+<script>
+  $(document).ready(function() {
+    //for(var i=0;i<=30;i++){}
+    $("img").on('click', function() {
+      var casa = $(this).attr('alt');
+      var link = "https://anapioficeandfire.com/api/houses/"+ casa;
+      $.get(link, function(data) {
+        console.log(data);
+        var info = "";
+        info += "<p>Nombre: "+data.name+"</p>";
+        info += "<p>Palabras: "+data.words+"</p>";
+        info += "<p>Titulos: "+data.titles+ "</p>";
+        $(".informacion").html(info);
+      }, "json");
+    });
+    
+});
+</script>
+</body>
+</html>
